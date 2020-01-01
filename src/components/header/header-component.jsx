@@ -8,6 +8,10 @@ import { auth } from '../../firebase/utils';
 import CartIcon from '../cart-icon';
 import CartDropdown from '../cart-dropdown';
 
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../selectors/user';
+import { selectCartHidden } from '../../selectors/cart';
+
 function Header({ currentUser, hidden }) {
     return (
         <div className='header'>
@@ -32,9 +36,9 @@ function Header({ currentUser, hidden }) {
     )
 };
 
-const mapStateToProps = state => ({
-    currentUser: state.user.currentUser,
-    hidden: state.cart.hidden
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
 });
 
 export default connect(mapStateToProps)(Header);
